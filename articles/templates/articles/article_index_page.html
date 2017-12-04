@@ -11,8 +11,11 @@
 
     {% for post in page.get_children %}
         <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    {% comment %}
         {{ post.specific.intro }}
         {{ post.specific.body|richtext }}
+    {% endcomment %}
+        {% include_block post.body %}        
     {% endfor %}
 
 {% endblock %}
