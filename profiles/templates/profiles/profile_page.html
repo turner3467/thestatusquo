@@ -1,17 +1,71 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.date }}</p>
 
-    <div class="intro">{{ page.intro }}</div>
+    <div class="container">
 
-    {{ page.body|richtext }}
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">{{ page.title }}</h1>
 
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Blog Home 2</li>
+      </ol>
+
+      <!-- Preview Image -->
+      {% image page.feed_image max-900x300 class="img-fluid rounded" %}
+      <hr>
+
+      <!-- Date/Time -->
+      <p>Posted on {{ page.publish_date }}</p>
+
+      <hr>
+
+      <!-- Post Content -->
+      <p class="lead">{{ page.intro }}</p>
+
+      {% include_block page.body %}
+
+      <hr>
+
+      {% if page.documents.all %}      
+        <h3>Documents</h3>
+        <ul>
+          {% for doc in page.documents.all %}
+              <li>
+                  <a href="{{ doc.document.url }}">{{ doc.document }}</a>
+              </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <hr>
+
+      {% if page.links.all %}
+        <h3>References</h3>
+        <ul>
+          {% for link in page.links.all %}
+            <li>
+              <a href="{{ link.url }}">{{ link.description }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if page.related_profiles.all %}
+        <h3>Related Profiles</h3>
+        {% for profile in page.related_profiles.all %}
+          <a href="{{ profile.profile.url }}">{{ profile.profile.title }}</a>
+        {% endfor %}
+      {% endif %}
+        
+    </div>
 
 {% endblock %}

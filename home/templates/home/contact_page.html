@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load tsq_tags %}
+
+{% block body_class %}template_contact_page{% endblock %}
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Page Heading/Breadcrumbs -->
+      <h1 class="mt-4 mb-3">{{ page.title }}</h1>
+
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+
+      <!-- Contact Form -->
+      <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+      <div class="row">
+        <div class="col-lg-8 mb-4">
+          <h3>Send us a Message</h3>
+          <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="control-group form-group">
+                  <div class="controls">
+                    <label>{{ field.label }}</label>
+                    {{ field|addcss:"form-control" }}
+                    <p class="help-block"></p>
+                  </div>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+{% endblock content %}

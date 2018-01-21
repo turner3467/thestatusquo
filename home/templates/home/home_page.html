@@ -1,17 +1,54 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-    {% for post in page.get_children %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-    {% endfor %}
+    <div class="container">
+        <h1 class="mt-4 mb-3">Latest articles</h1>
+        {% for article in articles %}
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <a href="#">
+                    {% image article.feed_image max-750x300 class="img-fluid rounded" %}
+                  </a>
+                </div>
+                <div class="col-lg-6">
+                  <h2 class="card-title">{{ article.title }}</h2>
+                  <p class="card-text">{{ article.intro }}</p>
+                  <a href="{% pageurl article %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on {{ article.publish_date }}
+            </div>
+          </div>
+        {% endfor %}
 
-    <h1>Welcome to your new Wagtail site!</h1>
-
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>
-
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+        <h1 class="mt-4 mb-3">Latest profiles</h1>
+        
+        <div class="row">
+            {% for profile in profiles %}
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                  <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="{% pageurl profile %}">{{ profile.title }}</a>
+                      </h4>
+                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                      Updated on {{ profile.last_published_at }}
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
