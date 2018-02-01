@@ -13,7 +13,7 @@ DATABASES = {
         'NAME': os.environ['POSTGRESQL_NAME'],
         'USER': os.environ['POSTGRESQL_USER'],
         'PASSWORD': os.environ['POSTGRESQL_PASSWORD'],
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
