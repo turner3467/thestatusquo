@@ -18,6 +18,8 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ['.thestatusquo.co.uk']
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = os.environ['EMAIL_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_USER']
