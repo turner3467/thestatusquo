@@ -19,6 +19,8 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ['.thestatusquo.co.uk']
+
 try:
     from .local import *
 except ImportError:
