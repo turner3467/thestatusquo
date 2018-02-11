@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from .base import *
 
 config = ConfigParser()
-config.read(os.path.join(os.environ['HOME'], 'tsq.ini'))
+config.read(os.path.join(os.environ['CONFIG_HOME'], 'tsq.ini'))
 
 DEBUG = False
 
