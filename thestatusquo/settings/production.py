@@ -1,18 +1,21 @@
 from __future__ import absolute_import, unicode_literals
 
-import os
+from configparser import ConfigParser
 from .base import *
+
+config = ConfigParser()
+config.read('tsq.ini')
 
 DEBUG = False
 
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = config['DJANGO']['DJANGO_SECRET_KEY']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['POSTGRESQL_NAME'],
-        'USER': os.environ['POSTGRESQL_USER'],
-        'PASSWORD': os.environ['POSTGRESQL_PASSWORD'],
+        'NAME': config['DATABASE']['POSTGRESQL_NAME'],
+        'USER': config['DATABASE']['POSTGRESQL_USER'],
+        'PASSWORD': config['DATABASE']['POSTGRESQL_PASSWORD'],
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -21,8 +24,8 @@ DATABASES = {
 ALLOWED_HOSTS = ['.thestatusquo.co.uk']
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = os.environ['EMAIL_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_USER']
+EMAIL_HOST_USER = config['EMAIL']['EMAIL_USER']
+EMAIL_HOST_PASSWORD = config['EMAIL']['EMAIL_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
