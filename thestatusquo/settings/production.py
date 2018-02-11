@@ -1,10 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 
+import os
 from configparser import ConfigParser
 from .base import *
 
 config = ConfigParser()
-config.read('tsq.ini')
+config.read(os.path.join(os.environ['HOME'], 'tsq.ini'))
 
 DEBUG = False
 
