@@ -53,11 +53,6 @@ class ProfilePage(Page):
         related_name='+'
     )
 
-    search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('body'),
-    ]
-
     content_panels = Page.content_panels + [
         FieldPanel('publish_date'),
         StreamFieldPanel('body'),

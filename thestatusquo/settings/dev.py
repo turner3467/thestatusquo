@@ -19,7 +19,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['.thestatusquo.co.uk']
+ALLOWED_HOSTS = ['localhost']
 
 try:
     from .local import *

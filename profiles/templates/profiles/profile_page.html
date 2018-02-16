@@ -33,9 +33,8 @@
 
       {% include_block page.body %}
 
-      <hr>
-
-      {% if page.documents.all %}      
+      {% if page.documents.all %}
+        <hr>    
         <h3>Documents</h3>
         <ul>
           {% for doc in page.documents.all %}
@@ -46,9 +45,8 @@
         </ul>
       {% endif %}
 
-      <hr>
-
       {% if page.links.all %}
+        <hr>
         <h3>References</h3>
         <ul>
           {% for link in page.links.all %}
@@ -60,10 +58,15 @@
       {% endif %}
 
       {% if page.related_profiles.all %}
+        <hr>
         <h3>Related Profiles</h3>
-        {% for profile in page.related_profiles.all %}
-          <a href="{{ profile.profile.url }}">{{ profile.profile.title }}</a>
-        {% endfor %}
+        <ul>
+          {% for profile in page.related_profiles.all %}
+            <li>
+              <a href="{{ profile.profile.url }}">{{ profile.profile.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       {% endif %}
         
     </div>
